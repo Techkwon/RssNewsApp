@@ -3,6 +3,7 @@ package com.example.rssnesapp.adapter
 import android.app.Activity
 import android.content.Intent
 import android.os.SystemClock
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +26,7 @@ class NewsAdapter(private val activity: Activity): RecyclerView.Adapter<NewsAdap
 
     private val newsList = ArrayList<NewsItem>()
     private val urls = HashMap<String, String>()
-    private val descriptions = HashMap<String, NewsDescription?>()
+    private val descriptions = HashMap<String, NewsDescription>()
     private var lastClickTime: Long = 0
 
     companion object {
@@ -70,13 +71,18 @@ class NewsAdapter(private val activity: Activity): RecyclerView.Adapter<NewsAdap
 
     private fun updateDescription(holder: ViewHolder, guid: String) {
         val description = descriptions[guid]
+        val keywords = description?.keywords
 
         with(holder) {
-            if (description != null) {
-                tvAbstract.text = description.abstract
-                tvKeyword1.text = description.keywords[0]; tvKeyword1.visibility = View.VISIBLE
-                tvKeyword2.text = description.keywords[1]; tvKeyword2.visibility = View.VISIBLE
-                tvKeyword3.text = description.keywords[2]; tvKeyword3.visibility = View.VISIBLE
+            tvAbstract.text = description?.abstract
+            if (keywords!= null && keywords.isNotEmpty()) {
+                try {
+                    tvKeyword1.text = keywords[0]; tvKeyword1.visibility = View.VISIBLE
+                    tvKeyword2.text = keywords[1]; tvKeyword2.visibility = View.VISIBLE
+                    tvKeyword3.text = keywords[2]; tvKeyword3.visibility = View.VISIBLE
+                } catch (e: ArrayIndexOutOfBoundsException) {
+                    e.printStackTrace()
+                }
             } else {
                 tvKeyword1.visibility = View.GONE
                 tvKeyword2.visibility = View.GONE
@@ -84,6 +90,7 @@ class NewsAdapter(private val activity: Activity): RecyclerView.Adapter<NewsAdap
             }
         }
     }
+
 
     private fun moveToNewsView(url: String, keywords: Array<String>?) {
         val currentTime = SystemClock.uptimeMillis()
@@ -114,7 +121,7 @@ class NewsAdapter(private val activity: Activity): RecyclerView.Adapter<NewsAdap
         }
     }
 
-    internal fun addDescriptions(data: HashMap<String, NewsDescription?>) {
+    internal fun addDescriptions(data: HashMap<String, NewsDescription>) {
         if (descriptions != data) {
             descriptions.clear()
             descriptions.putAll(data)

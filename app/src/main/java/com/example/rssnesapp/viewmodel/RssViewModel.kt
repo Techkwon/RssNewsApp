@@ -17,15 +17,16 @@ import org.jsoup.select.Elements
 import java.io.IOException
 import java.net.SocketTimeoutException
 import kotlin.collections.HashMap
+import kotlin.math.abs
 
 class RssViewModel: ViewModel() {
     internal val newsItems = MutableLiveData<List<NewsItem>>()
     internal val thumbnailUrls = MutableLiveData<HashMap<String, String>>()
-    internal val descriptions = MutableLiveData<HashMap<String, NewsDescription?>>()
+    internal val descriptions = MutableLiveData<HashMap<String, NewsDescription>>()
     internal val errorMessage = MutableLiveData<Int>()
 
     private val mapUrls = HashMap<String, String>()
-    private val mapDescriptions = HashMap<String, NewsDescription?>()
+    private val mapDescriptions = HashMap<String, NewsDescription>()
 
     companion object {
         const val ERROR_TIME_OUT_EXCEPTION = 1
@@ -91,16 +92,21 @@ class RssViewModel: ViewModel() {
         val keywordsEntries: List<Map.Entry<String, Int>> = getKeywordEntries(abstract)
 
         if (keywordsEntries.isNotEmpty()) {
+            val keywordArray = when (keywordsEntries.size) {
+                1 -> arrayOf(keywordsEntries[0].key)
+                2 -> arrayOf(keywordsEntries[0].key, keywordsEntries[1].key)
+                else -> arrayOf(keywordsEntries[0].key, keywordsEntries[1].key, keywordsEntries[2].key)
+            }
             mapDescriptions[news.guid] =
-                NewsDescription(abstract, arrayOf(keywordsEntries[0].key, keywordsEntries[1].key, keywordsEntries[2].key))
+                NewsDescription(abstract, keywordArray)
         } else {
-            mapDescriptions[news.guid] = null
+            mapDescriptions[news.guid] = NewsDescription(abstract, emptyArray())
         }
 
         if (mapDescriptions.size == itemSize) setDescriptions(mapDescriptions)
     }
 
-    private fun setDescriptions(descriptions: HashMap<String, NewsDescription?>) = viewModelScope.launch(Dispatchers.Main) {
+    private fun setDescriptions(descriptions: HashMap<String, NewsDescription>) = viewModelScope.launch(Dispatchers.Main) {
         this@RssViewModel.descriptions.value = descriptions
     }
 
