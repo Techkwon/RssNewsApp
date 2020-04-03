@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_20">20dp</dimen>
+    <dimen name="margin_40">40dp</dimen>
+    <dimen name="small_logo_size_40">40dp</dimen>
+    <dimen name="big_logo_size_120">120dp</dimen>
+    <dimen name="padding_20">20dp</dimen>
+    <dimen name="splash_description_width_250">250dp</dimen>
+    <dimen name="text_size_20">20sp</dimen>
+    <dimen name="margin_10">10dp</dimen>
+    <dimen name="margin_5">5dp</dimen>
+    <dimen name="padding_10">10dp</dimen>
+    <dimen name="text_size_14">14sp</dimen>
+    <dimen name="text_size_16">16sp</dimen>
+    <dimen name="news_thumbnail_size">70dp</dimen>
+    <dimen name="corner_radius_20">20dp</dimen>
+    <dimen name="margin_15">15dp</dimen>
+    <dimen name="padding_8">8dp</dimen>
+    <dimen name="text_size_18">18sp</dimen>
+</resources>

@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">RssNewsApp</string>
+    <string name="text_copied_to_clipboard">클립보드에 복사되었습니다.</string>
+    <string name="news_list_title">Today\'s News</string>
+    <string name="time_out_error">요청 시간을 초과했습니다.</string>
+    <string name="io_error">통신 오류가 발생했습니다.</string>
+    <string name="no_update_error">업데이트된 뉴스가 없습니다.</string>
+    <string name="unknown_error">알 수 없는 오류가 발생했습니다.</string>
+    <string name="splash_label_1">최신 뉴스를 제공합니다.</string>
+    <string name="splash_label_2">뉴스의 키워드를 알아보세요.</string>
+    <string name="splash_label_3">뉴스를 클릭하면 원본 뉴스를 볼 수 있습니다.</string>
+    <string name="app_version">v1.0</string>
+    <string name="please_check_network_connection">인터넷 연결 상태를 확인해주세요 :(</string>
+    <string name="label_news_url">news_url</string>
+</resources>
