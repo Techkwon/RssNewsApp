@@ -118,7 +118,6 @@ class RssParser {
         }
     }
 
-
     private fun parseHtml(html: String): List<RelatedNews> {
         val doc = Jsoup.parse(html)
         val tags = doc.body().getElementsByTag("li")

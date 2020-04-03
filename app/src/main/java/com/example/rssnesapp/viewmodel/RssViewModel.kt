@@ -31,6 +31,8 @@ class RssViewModel: ViewModel() {
         const val ERROR_TIME_OUT_EXCEPTION = 1
         const val ERROR_IO_EXCEPTION = 2
         const val ERROR_NO_UPDATES = 3
+
+        const val TIME_OUT_DURATION = 5000
     }
 
     internal fun getNews(rssParser: RssParser) = viewModelScope.launch(Dispatchers.IO) {
@@ -54,10 +56,11 @@ class RssViewModel: ViewModel() {
             viewModelScope.launch(Dispatchers.IO) {
                 var metaTags = Elements()
                 try {
-                    SSLConnect().postHttps(news.link, 1000, 1000)
+                    SSLConnect().postHttps(news.link, 2000, 1000)
 
                     val doc = Jsoup
                         .connect(news.link)
+                        .timeout(TIME_OUT_DURATION)
                         .get()
 
                     metaTags = doc.getElementsByTag("meta")

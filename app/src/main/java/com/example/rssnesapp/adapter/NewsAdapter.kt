@@ -15,6 +15,7 @@ import com.example.rssnesapp.R
 import com.example.rssnesapp.data.NewsDescription
 import com.example.rssnesapp.data.NewsItem
 import com.example.rssnesapp.ui.NewsInfoActivity
+import com.example.rssnesapp.ui.NewsInfoActivity.Companion.EXTRA_NEWS_KEYWORDS
 import com.example.rssnesapp.ui.NewsInfoActivity.Companion.EXTRA_NEWS_URL
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_news_list.view.*
@@ -43,7 +44,8 @@ class NewsAdapter(private val activity: Activity): RecyclerView.Adapter<NewsAdap
         updateDescription(holder, newsList[position].guid)
         updateThumbnails(urls, holder, newsList[position].guid)
 
-        holder.constraintNews.setOnClickListener { moveToNewsView(newsList[position].link) }
+        val keywords = descriptions[newsList[position].guid]?.keywords
+        holder.constraintNews.setOnClickListener { moveToNewsView(newsList[position].link, keywords) }
     }
 
     private fun updateNewsItem(newsItem: NewsItem, holder: ViewHolder) {
@@ -83,7 +85,7 @@ class NewsAdapter(private val activity: Activity): RecyclerView.Adapter<NewsAdap
         }
     }
 
-    private fun moveToNewsView(url: String) {
+    private fun moveToNewsView(url: String, keywords: Array<String>?) {
         val currentTime = SystemClock.uptimeMillis()
         val elapsedTime = currentTime - lastClickTime
         lastClickTime = currentTime
@@ -92,6 +94,7 @@ class NewsAdapter(private val activity: Activity): RecyclerView.Adapter<NewsAdap
 
         val intent = Intent(activity, NewsInfoActivity::class.java)
         intent.putExtra(EXTRA_NEWS_URL, url)
+        intent.putExtra(EXTRA_NEWS_KEYWORDS, keywords)
         activity.startActivity(intent)
     }
 

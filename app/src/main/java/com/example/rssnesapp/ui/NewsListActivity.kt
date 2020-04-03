@@ -26,9 +26,9 @@ class NewsListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news_feed)
+        title = getString(R.string.news_list_title)
 
         if (isNetworkAvailable(this)) {
-            title = getString(R.string.news_list_title)
             viewModel = ViewModelProviders.of(this).get(RssViewModel::class.java)
             initAdapter()
             getNewsItems()

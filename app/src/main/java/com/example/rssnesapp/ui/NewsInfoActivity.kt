@@ -14,9 +14,11 @@ import kotlinx.android.synthetic.main.activity_news_view.*
 
 class NewsInfoActivity : AppCompatActivity() {
     private var url: String? = null
+    private var keywords: Array<String>? = null
 
     companion object {
         const val EXTRA_NEWS_URL = "extra_news_url"
+        const val EXTRA_NEWS_KEYWORDS = "extra_news_keywords"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +26,7 @@ class NewsInfoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_news_view)
 
         getIntendData()
+        showKeywords()
         setViewClickListener()
 
         if (savedInstanceState == null) initWebView()
@@ -41,6 +44,20 @@ class NewsInfoActivity : AppCompatActivity() {
 
     private fun getIntendData() {
         url = intent.getStringExtra(EXTRA_NEWS_URL)
+        keywords = intent.getStringArrayExtra(EXTRA_NEWS_KEYWORDS)
+    }
+
+    private fun showKeywords() {
+        if (keywords != null) {
+            keywords?.let {
+                this.tv_keyword1.text = it[0]
+                this.tv_keyword2.text = it[1]
+                this.tv_keyword3.text = it[2]
+                this.constraint_holder_webview_keywords.visibility = View.VISIBLE
+            }
+        } else {
+            this.constraint_holder_webview_keywords.visibility = View.GONE
+        }
     }
 
     private fun setViewClickListener() {
