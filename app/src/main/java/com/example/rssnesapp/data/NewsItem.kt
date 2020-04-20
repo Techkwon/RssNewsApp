@@ -1,6 +1,6 @@
 package com.example.rssnesapp.data
 
-class NewsItem(
+data class NewsItem(
     val title: String,
     val link: String,
     val guid: String,

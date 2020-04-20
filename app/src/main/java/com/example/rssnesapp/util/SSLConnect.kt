@@ -38,7 +38,7 @@ class SSLConnect {
         }
     }
 
-    internal fun postHttps(url: String, connTimeout: Int, readTimeout: Int): HttpsURLConnection? {
+    fun postHttps(url: String, connTimeout: Int, readTimeout: Int): HttpsURLConnection? {
         trustAllHosts()
         var https: HttpsURLConnection? = null
         try {

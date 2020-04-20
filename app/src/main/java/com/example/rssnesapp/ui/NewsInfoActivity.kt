@@ -48,20 +48,18 @@ class NewsInfoActivity : AppCompatActivity() {
     }
 
     private fun showKeywords() {
-        if (keywords != null) {
-            keywords?.let {
-                try {
-                    this.constraint_holder_webview_keywords.visibility = View.VISIBLE
-                    this.tv_keyword1.text = it[0]; this.tv_keyword1.visibility = View.VISIBLE
-                    this.tv_keyword2.text = it[1]; this.tv_keyword2.visibility = View.VISIBLE
-                    this.tv_keyword3.text = it[2]; this.tv_keyword3.visibility = View.VISIBLE
-                } catch (e: ArrayIndexOutOfBoundsException) {
-                    e.printStackTrace()
-                }
+        keywords?.let {
+            try {
+                this.constraint_holder_webview_keywords.visibility = View.VISIBLE
+                this.tv_keyword1.text = it[0]; this.tv_keyword1.visibility = View.VISIBLE
+                this.tv_keyword2.text = it[1]; this.tv_keyword2.visibility = View.VISIBLE
+                this.tv_keyword3.text = it[2]; this.tv_keyword3.visibility = View.VISIBLE
+            } catch (e: ArrayIndexOutOfBoundsException) {
+                e.printStackTrace()
             }
-        } else {
-            this.constraint_holder_webview_keywords.visibility = View.GONE
+            return
         }
+        this.constraint_holder_webview_keywords.visibility = View.GONE
     }
 
     private fun setViewClickListener() {

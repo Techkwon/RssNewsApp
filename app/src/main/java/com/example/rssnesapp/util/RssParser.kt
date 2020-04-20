@@ -39,7 +39,7 @@ class RssParser {
     }
 
     @Throws(XmlPullParserException::class, IOException::class)
-    internal fun getNewsItems(): List<NewsItem> {
+    fun getNewsItems(): List<NewsItem> {
         val url = URL(RSS_URL)
         val conn = url.openConnection() as HttpURLConnection
 

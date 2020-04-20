@@ -1,6 +1,6 @@
 package com.example.rssnesapp.data
 
-class NewsDescription(
+data class NewsDescription(
     val abstract: String,
     val keywords: Array<String>
 )

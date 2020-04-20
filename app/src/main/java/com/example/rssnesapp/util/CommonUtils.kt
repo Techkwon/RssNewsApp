@@ -13,7 +13,7 @@ import kotlin.collections.HashMap
 object CommonUtils {
 
     @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-    internal fun isNetworkAvailable(context: Context): Boolean {
+    fun isNetworkAvailable(context: Context): Boolean {
         var result = false
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
@@ -45,7 +45,7 @@ object CommonUtils {
         return result
     }
 
-    internal fun getImageUrlFromTags(metaTags: Elements): String {
+    fun getImageUrlFromTags(metaTags: Elements): String {
         val imageTags = metaTags
             .filter { it.attr("property") == "og:image" }
             .filter { it.attr("content").startsWith("http") }
@@ -53,14 +53,14 @@ object CommonUtils {
         return if (imageTags.isNotEmpty()) imageTags[0].attr("content") else ""
     }
 
-    internal fun getAbstract(metaTags: Elements): String {
+    fun getAbstract(metaTags: Elements): String {
         val descTags = getDescTags(metaTags)
         return if (descTags.isNotEmpty()) descTags[0].attr("content") else ""
     }
 
     private fun getDescTags(metaTags: Elements) = metaTags.filter { it.attr("property") == "og:description" }
 
-    internal fun getKeywordEntries(abstract: String): List<Map.Entry<String, Int>> {
+    fun getKeywordEntries(abstract: String): List<Map.Entry<String, Int>> {
         val extractedWords = splitWords(abstract)
         val wordsWithCounts: HashMap<String, Int> = countDuplicateWords(extractedWords)
 

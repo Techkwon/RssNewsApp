@@ -105,7 +105,7 @@ class NewsAdapter(private val activity: Activity): RecyclerView.Adapter<NewsAdap
         activity.startActivity(intent)
     }
 
-    internal fun addNews(items: List<NewsItem>) {
+    fun addNews(items: List<NewsItem>) {
         if (newsList != items) {
             newsList.clear()
             newsList.addAll(items)
@@ -113,7 +113,7 @@ class NewsAdapter(private val activity: Activity): RecyclerView.Adapter<NewsAdap
         }
     }
 
-    internal fun addUrls(data: HashMap<String, String>) {
+    fun addUrls(data: HashMap<String, String>) {
         if (urls != data) {
             urls.clear()
             urls.putAll(data)
@@ -121,7 +121,7 @@ class NewsAdapter(private val activity: Activity): RecyclerView.Adapter<NewsAdap
         }
     }
 
-    internal fun addDescriptions(data: HashMap<String, NewsDescription>) {
+    fun addDescriptions(data: HashMap<String, NewsDescription>) {
         if (descriptions != data) {
             descriptions.clear()
             descriptions.putAll(data)

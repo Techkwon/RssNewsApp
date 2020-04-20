@@ -61,19 +61,10 @@ dependencies {
     implementation "androidx.core:core-ktx:$ktxVersion"
     api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
 
-    // exoplayer
-    def exoplayerVersion = "2.10.8"
-    implementation "com.google.android.exoplayer:exoplayer-core:$exoplayerVersion"
-    implementation "com.google.android.exoplayer:exoplayer-dash:$exoplayerVersion"
-    implementation "com.google.android.exoplayer:exoplayer-ui:$exoplayerVersion"
-
     // coroutine
     def coroutineVersion = "1.3.2"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion"
-
-    def gsonVersion = "2.8.6"
-    implementation "com.google.code.gson:gson:$gsonVersion"
 
     // html parser (https://jsoup.org/)
     def jsoupVersion = "1.13.1"

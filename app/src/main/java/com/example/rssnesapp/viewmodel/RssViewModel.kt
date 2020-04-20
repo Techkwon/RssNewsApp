@@ -20,10 +20,10 @@ import kotlin.collections.HashMap
 import kotlin.math.abs
 
 class RssViewModel: ViewModel() {
-    internal val newsItems = MutableLiveData<List<NewsItem>>()
-    internal val thumbnailUrls = MutableLiveData<HashMap<String, String>>()
-    internal val descriptions = MutableLiveData<HashMap<String, NewsDescription>>()
-    internal val errorMessage = MutableLiveData<Int>()
+    val newsItems = MutableLiveData<List<NewsItem>>()
+    val thumbnailUrls = MutableLiveData<HashMap<String, String>>()
+    val descriptions = MutableLiveData<HashMap<String, NewsDescription>>()
+    val errorMessage = MutableLiveData<Int>()
 
     private val mapUrls = HashMap<String, String>()
     private val mapDescriptions = HashMap<String, NewsDescription>()
@@ -36,7 +36,7 @@ class RssViewModel: ViewModel() {
         const val TIME_OUT_DURATION = 5000
     }
 
-    internal fun getNews(rssParser: RssParser) = viewModelScope.launch(Dispatchers.IO) {
+    fun getNews(rssParser: RssParser) = viewModelScope.launch(Dispatchers.IO) {
         setNews(rssParser.getNewsItems())
     }
 
