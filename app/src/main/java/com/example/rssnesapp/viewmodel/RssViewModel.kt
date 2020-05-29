@@ -17,7 +17,6 @@ import org.jsoup.select.Elements
 import java.io.IOException
 import java.net.SocketTimeoutException
 import kotlin.collections.HashMap
-import kotlin.math.abs
 
 class RssViewModel: ViewModel() {
     val newsItems = MutableLiveData<List<NewsItem>>()
@@ -97,8 +96,7 @@ class RssViewModel: ViewModel() {
                 2 -> arrayOf(keywordsEntries[0].key, keywordsEntries[1].key)
                 else -> arrayOf(keywordsEntries[0].key, keywordsEntries[1].key, keywordsEntries[2].key)
             }
-            mapDescriptions[news.guid] =
-                NewsDescription(abstract, keywordArray)
+            mapDescriptions[news.guid] = NewsDescription(abstract, keywordArray)
         } else {
             mapDescriptions[news.guid] = NewsDescription(abstract, emptyArray())
         }

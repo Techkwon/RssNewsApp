@@ -23,19 +23,22 @@ class RssParser {
         private const val ITEM_NAME_DESC = "description"
         private const val ITEM_NAME_SOURCE = "source"
 
-        private const val ITEM_TITLE_TAG = 0
-        private const val ITEM_LINK_TAG = 1
-        private const val ITEM_GUID_TAG = 2
-        private const val ITEM_DATE_TAG = 3
-        private const val ITEM_DESC_TAG = 4
-        private const val ITEM_SOURCE_TAG = 5
-
         private lateinit var itemTitle: String
         private lateinit var itemLink: String
         private lateinit var itemGuid: String
         private lateinit var itemDate: String
         private lateinit var itemDesc: String
         private lateinit var itemSource: String
+    }
+
+    enum class Tag{
+        ITEM_TITLE,
+        ITEM_LINK,
+        ITEM_GUID,
+        ITEM_DATE,
+        ITEM_DESC,
+        ITEM_SOURCE,
+        ITEM_UNKNOWN
     }
 
     @Throws(XmlPullParserException::class, IOException::class)
@@ -74,7 +77,7 @@ class RssParser {
             when (eventType) {
                 XmlPullParser.START_TAG -> {
                     if (parser.name == CHANNEL_ITEM) isInItemTag = true
-                    if (isInItemTag) tagType = getItemTagNumber(parser.name)
+                    if (isInItemTag) tagType = getItemTagNumber(parser.name).ordinal
                 }
 
                 XmlPullParser.TEXT -> {
@@ -95,26 +98,26 @@ class RssParser {
         return items
     }
 
-    private fun getItemTagNumber(tagName: String): Int {
+    private fun getItemTagNumber(tagName: String): Tag {
         return when (tagName) {
-            ITEM_NAME_TITLE -> ITEM_TITLE_TAG
-            ITEM_NAME_LINK -> ITEM_LINK_TAG
-            ITEM_NAME_GUID -> ITEM_GUID_TAG
-            ITEM_NAME_DATE -> ITEM_DATE_TAG
-            ITEM_NAME_DESC -> ITEM_DESC_TAG
-            ITEM_NAME_SOURCE -> ITEM_SOURCE_TAG
-            else -> -1
+            ITEM_NAME_TITLE -> Tag.ITEM_TITLE
+            ITEM_NAME_LINK -> Tag.ITEM_LINK
+            ITEM_NAME_GUID -> Tag.ITEM_GUID
+            ITEM_NAME_DATE -> Tag.ITEM_DATE
+            ITEM_NAME_DESC -> Tag.ITEM_DESC
+            ITEM_NAME_SOURCE -> Tag.ITEM_SOURCE
+            else -> Tag.ITEM_UNKNOWN
         }
     }
 
     private fun setItemValues(tagType: Int, value: String) {
         when (tagType) {
-            ITEM_TITLE_TAG -> itemTitle = value
-            ITEM_LINK_TAG -> itemLink = value
-            ITEM_GUID_TAG -> itemGuid = value
-            ITEM_DATE_TAG -> itemDate = value
-            ITEM_DESC_TAG -> itemDesc = value
-            ITEM_SOURCE_TAG -> itemSource = value
+            Tag.ITEM_TITLE.ordinal -> itemTitle = value
+            Tag.ITEM_LINK.ordinal -> itemLink = value
+            Tag.ITEM_GUID.ordinal -> itemGuid = value
+            Tag.ITEM_DATE.ordinal -> itemDate = value
+            Tag.ITEM_DESC.ordinal -> itemDesc = value
+            Tag.ITEM_SOURCE.ordinal -> itemSource = value
         }
     }
 
