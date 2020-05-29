@@ -33,9 +33,8 @@ class NewsListActivity : AppCompatActivity() {
             initAdapter()
             getNewsItems()
             setRefreshLayoutListener()
-        } else {
+        } else
             showNetworkError()
-        }
     }
 
     private fun getNewsItems() {
