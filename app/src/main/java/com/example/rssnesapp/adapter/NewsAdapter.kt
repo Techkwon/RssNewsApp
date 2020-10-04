@@ -23,7 +23,6 @@ import kotlinx.android.synthetic.main.item_news_list.view.*
 import kotlin.collections.ArrayList
 
 class NewsAdapter(private val activity: Activity): RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
-
     private val newsList = ArrayList<NewsItem>()
     private val urls = HashMap<String, String>()
     private val descriptions = HashMap<String, NewsDescription>()
@@ -90,7 +89,6 @@ class NewsAdapter(private val activity: Activity): RecyclerView.Adapter<NewsAdap
             }
         }
     }
-
 
     private fun moveToNewsView(url: String, keywords: Array<String>?) {
         val currentTime = SystemClock.uptimeMillis()

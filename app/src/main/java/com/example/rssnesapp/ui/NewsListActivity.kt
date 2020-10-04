@@ -20,7 +20,6 @@ import kotlinx.android.synthetic.main.activity_news_feed.*
 
 class NewsListActivity : AppCompatActivity() {
     private lateinit var viewModel: RssViewModel
-
     private lateinit var adapter: NewsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {

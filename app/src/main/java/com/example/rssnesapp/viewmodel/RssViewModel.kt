@@ -16,7 +16,6 @@ import org.jsoup.Jsoup
 import org.jsoup.select.Elements
 import java.io.IOException
 import java.net.SocketTimeoutException
-import kotlin.collections.HashMap
 
 class RssViewModel: ViewModel() {
     val newsItems = MutableLiveData<List<NewsItem>>()
