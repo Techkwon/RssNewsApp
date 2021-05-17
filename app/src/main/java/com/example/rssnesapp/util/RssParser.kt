@@ -31,7 +31,7 @@ class RssParser {
         private lateinit var itemSource: String
     }
 
-    enum class Tag{
+    enum class Tag {
         ITEM_TITLE,
         ITEM_LINK,
         ITEM_GUID,
