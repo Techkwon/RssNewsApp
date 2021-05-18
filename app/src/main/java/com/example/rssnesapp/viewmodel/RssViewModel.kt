@@ -34,8 +34,8 @@ class RssViewModel: ViewModel() {
         const val TIME_OUT_DURATION = 5 * 1000
     }
 
-    fun getNews(rssParser: RssParser) = viewModelScope.launch(Dispatchers.IO) {
-        setNews(rssParser.getNewsItems())
+    fun getNews() = viewModelScope.launch(Dispatchers.IO) {
+        setNews(RssParser().getNewsItems())
     }
 
     private fun setNews(news: List<NewsItem>) {

@@ -38,7 +38,7 @@ class NewsListActivity : AppCompatActivity() {
 
     private fun getNewsItems() {
         this.swipe_layout.isRefreshing = true
-        viewModel.getNews(RssParser())
+        viewModel.getNews()
 
         viewModel.newsItems.observe(this, Observer {
             adapter.addNews(it)
@@ -72,7 +72,7 @@ class NewsListActivity : AppCompatActivity() {
 
     private fun setRefreshLayoutListener() {
         this.swipe_layout.setOnRefreshListener {
-            viewModel.getNews(RssParser())
+            viewModel.getNews()
         }
     }
 

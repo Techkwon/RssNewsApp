@@ -14,14 +14,14 @@ class RssParser {
     companion object {
         private const val RSS_URL = "https://news.google.com/rss?hl=ko&gl=KR&ceid=KR:ko"
 
-        private const val CHANNEL_ITEM = "item"
+        private const val CHANNEL_TAG_ITEM = "item"
 
-        private const val ITEM_NAME_TITLE = "title"
-        private const val ITEM_NAME_LINK = "link"
-        private const val ITEM_NAME_GUID = "guid"
-        private const val ITEM_NAME_DATE = "pubDate"
-        private const val ITEM_NAME_DESC = "description"
-        private const val ITEM_NAME_SOURCE = "source"
+        private const val TAG_NAME_TITLE = "title"
+        private const val TAG_NAME_LINK = "link"
+        private const val TAG_NAME_GUID = "guid"
+        private const val TAG_NAME_DATE = "pubDate"
+        private const val TAG_NAME_DESC = "description"
+        private const val TAG_NAME_SOURCE = "source"
 
         private lateinit var itemTitle: String
         private lateinit var itemLink: String
@@ -76,8 +76,10 @@ class RssParser {
         while (eventType != XmlPullParser.END_DOCUMENT) {
             when (eventType) {
                 XmlPullParser.START_TAG -> {
-                    if (parser.name == CHANNEL_ITEM) isInItemTag = true
-                    if (isInItemTag) tagType = getItemTagNumber(parser.name).ordinal
+                    if (parser.name == CHANNEL_TAG_ITEM) {
+                        isInItemTag = true
+                        tagType = getItemTag(parser.name).ordinal
+                    }
                 }
 
                 XmlPullParser.TEXT -> {
@@ -85,7 +87,7 @@ class RssParser {
                 }
 
                 XmlPullParser.END_TAG -> {
-                    if (parser.name == CHANNEL_ITEM) {
+                    if (parser.name == CHANNEL_TAG_ITEM) {
                         val relatedNews = parseHtml(itemDesc)
                         items.add(NewsItem(itemTitle, itemLink, itemGuid, itemDate, relatedNews, itemSource))
                         isInItemTag = false
@@ -98,14 +100,14 @@ class RssParser {
         return items
     }
 
-    private fun getItemTagNumber(tagName: String): Tag {
+    private fun getItemTag(tagName: String): Tag {
         return when (tagName) {
-            ITEM_NAME_TITLE -> Tag.ITEM_TITLE
-            ITEM_NAME_LINK -> Tag.ITEM_LINK
-            ITEM_NAME_GUID -> Tag.ITEM_GUID
-            ITEM_NAME_DATE -> Tag.ITEM_DATE
-            ITEM_NAME_DESC -> Tag.ITEM_DESC
-            ITEM_NAME_SOURCE -> Tag.ITEM_SOURCE
+            TAG_NAME_TITLE -> Tag.ITEM_TITLE
+            TAG_NAME_LINK -> Tag.ITEM_LINK
+            TAG_NAME_GUID -> Tag.ITEM_GUID
+            TAG_NAME_DATE -> Tag.ITEM_DATE
+            TAG_NAME_DESC -> Tag.ITEM_DESC
+            TAG_NAME_SOURCE -> Tag.ITEM_SOURCE
             else -> Tag.ITEM_UNKNOWN
         }
     }

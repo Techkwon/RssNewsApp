@@ -40,7 +40,7 @@ class SSLConnect {
 
     fun postHttps(url: String, connTimeout: Int, readTimeout: Int): HttpsURLConnection? {
         trustAllHosts()
-        var https: HttpsURLConnection? = null
+        val https: HttpsURLConnection?
         try {
             https = URL(url).openConnection() as HttpsURLConnection
             https.hostnameVerifier = verifier
