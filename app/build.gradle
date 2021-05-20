@@ -16,6 +16,17 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        debug {
+            storeFile file('../keystore')
+            storePassword 'woogearkwon'
+            keyAlias 'rssnews'
+            keyPassword 'woogearkwon'
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
