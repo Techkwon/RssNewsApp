@@ -76,10 +76,8 @@ class RssParser {
         while (eventType != XmlPullParser.END_DOCUMENT) {
             when (eventType) {
                 XmlPullParser.START_TAG -> {
-                    if (parser.name == CHANNEL_TAG_ITEM) {
-                        isInItemTag = true
-                        tagType = getItemTag(parser.name).ordinal
-                    }
+                    if (parser.name == CHANNEL_TAG_ITEM) isInItemTag = true
+                    if (isInItemTag) tagType = getItemTag(parser.name).ordinal
                 }
 
                 XmlPullParser.TEXT -> {
